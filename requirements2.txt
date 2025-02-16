@@ -1,0 +1,2 @@
+--index-url https://www.paddlepaddle.org.cn/packages/stable/cu123/
+paddlepaddle-gpu==3.0.0b2
