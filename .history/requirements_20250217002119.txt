@@ -1,0 +1,10 @@
+# PyTorch 系列（请根据你的 Python 版本和系统架构调整文件名）
+https://download.pytorch.org/whl/cu126/torch-1.12.1%2Bcu126-cp39-cp39-manylinux1_x86_64.whl
+https://download.pytorch.org/whl/cu126/torchvision-0.13.1%2Bcu126-cp39-cp39-manylinux1_x86_64.whl
+https://download.pytorch.org/whl/cu126/torchaudio-0.12.1-cp39-cp39-manylinux1_x86_64.whl
+
+# PaddlePaddle 系列
+https://www.paddlepaddle.org.cn/packages/stable/cu123/paddlepaddle_gpu-3.0.0b2-cp39-cp39-manylinux1_x86_64.whl
+
+
+
