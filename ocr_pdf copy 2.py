@@ -3,9 +3,6 @@ from paddlex import create_pipeline
 import fitz
 import json
 
-from paddlex import create_model
-
-
 # Create OCR pipeline
 pipeline = create_pipeline(pipeline="OCR", device='gpu')
 
@@ -34,6 +31,7 @@ for pdf_file in pdf_files:
             input=temp_image_path
         )
         
+        print(type(output))
 
         # Save results
         output_base = os.path.join("output", pdf_file.replace(".pdf", ""))
@@ -44,7 +42,6 @@ for pdf_file in pdf_files:
             res.save_to_img(save_path=output_base)
             json_path = os.path.join(output_base, f"result_{i}.json")
             with open(json_path, 'w', encoding='utf-8') as json_file:
-                print(res.keys())
                 result_data = {
                     "input_path": res["input_path"],
                     "dt_polys": [_.tolist() for _ in res["dt_polys"]],  # list[ndarray, ndarray, ...]
