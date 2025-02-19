@@ -4,3 +4,5 @@ csv_output
 output
 output2
 splited_pdf
+_archive
+__pycache__
