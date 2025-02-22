@@ -1,6 +1,6 @@
 #%%
 import ollama
-from prompt_router import prompt_router
+from lib.prompt_router import prompt_router
 from pyperclip import copy
 import pandas as pd
 import asyncio
