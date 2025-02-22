@@ -3,8 +3,16 @@ from pathlib import Path
 
 class PromptRouter:
     def __init__(self):
-        self.prompt_dir = Path(__file__).parent / "prompts"
+        self.prompt_dir = Path(__file__).parent.parent / "prompts"
         self.cache = {}
+        self.prompts = {
+            'word_analysis3': '''You are a highly capable OCR analysis tool. Your task is to process an array of OCR data objects—each with text positions, content, and confidence scores—and produce a JSON response that exactly follows the structure below.
+
+Input JSON Data: {text_group}
+
+... rest of your prompt template ...
+'''
+        }
 
     def get_prompt(self, name: str) -> str:
         """

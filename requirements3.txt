@@ -4,3 +4,8 @@ pdf2image
 paddleocr
 ollama
 ipykernel
+pyperclip
+langchain
+pydantic
+langchain-community
+# langchain-ollama

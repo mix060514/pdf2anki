@@ -1,68 +1,31 @@
-Updated Prompt for OCR Data Processing:
+You are a highly capable OCR analysis tool. Your task is to process the following OCR data and produce a structured JSON response.
 
-You are a highly capable OCR analysis tool. Your task is to process an array of OCR data objects—each with text positions, content, and confidence scores—and produce a JSON response that exactly follows the structure below. Note that the OCR data may contain errors that require human verification.
+{text_group}
 
-Processing Steps:
-
-Extract the Main Word:
-
-Identify the primary English word.
-Remove any extraneous characters (e.g., bracketed texts) and low-confidence fragments, keeping only the clean word.
-Determine the Split into Roots or Affixes:
-
-Look for text segments that split the word (e.g., “an /alphabet /ic”).
-Combine these parts into a single string (e.g., "an, alphabet, ic").
-Also, locate a matching segment that explains the parts (e.g., “without/alphabet/形容字尾”) and include this as the meaning.
-Extract Meanings:
-
-Identify all segments that provide definitions or translations.
-Each definition should be represented as an object with:
-"part_of_speech": The word class (e.g., "adj.", "n.", "v.").
-"translation": The corresponding Chinese translation.
-If multiple meanings exist, include all as separate entries.
-Identify Derivatives (if any):
-
-Check the OCR data for any derivative words.
-For each derivative, include its word, part of speech, and translation.
-If no derivatives are found, return an empty array.
-Match Example Sentences:
-
-Pair the English example sentences with their Chinese translations.
-Use positional or marker-based cues (like bullets) to correctly match each pair.
-Note that these sentences (both English and Chinese) might need verification due to OCR errors.
-Output JSON Structure:
-
-Generate the JSON response exactly as shown below, ensuring all fields are populated (or set to an empty array if no data is available):
-json
-Copy
+Please analyze the above OCR data and output a JSON with this structure:
 {
   "word": "English word",
   "split_to_root_or_affix": {
-    "value": "Root or affix parts (e.g., 'an, alphabet, ic')",
-    "meaning": "Explanation of the parts (e.g., 'without/alphabet/descriptive suffix')"
+    "value": "Root or affix parts",
+    "meaning": "Explanation of the parts"
   },
   "meanings": [
     {
-      "part_of_speech": "词性 (e.g., adj., n., v.)",
+      "part_of_speech": "词性",
       "translation": "Chinese translation"
     }
   ],
   "derivatives": [
     {
       "word": "derivative word",
-      "part_of_speech": "词性 (e.g., adj., n., v.)",
+      "part_of_speech": "词性",
       "translation": "Chinese translation"
     }
   ],
   "examples_sentence": [
     {
-      "english": "English example sentence (OCR result may need verification)",
-      "chinese": "Chinese translation (OCR result may need verification)"
+      "english": "English example sentence",
+      "chinese": "Chinese translation"
     }
   ]
 }
-Additional Instructions:
-
-Always use the entire OCR context to fill each field.
-Flag or annotate any field where the OCR results might be uncertain.
-Follow the structure exactly and ensure all optional fields (like derivatives) are returned as empty arrays if no data is available.
