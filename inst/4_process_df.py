@@ -1,7 +1,7 @@
 #%%
 import pandas as pd
 
-df = pd.read_csv('combined_output.csv')
+df = pd.read_csv('ref/combined_output.csv')
 df.columns = df.columns.str.lower()
 df = df.sort_values(['page','y']).reset_index(drop=True)
 df = df[df['page'] <= 565]

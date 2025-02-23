@@ -2,8 +2,8 @@ paddlex==3.0.0b2
 PyPDF2
 pdf2image
 paddleocr
-ollama
+# ollama
 ipykernel
 pyperclip
 pydantic
-langchain-ollama
+# langchain-ollama
