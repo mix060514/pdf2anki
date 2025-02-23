@@ -73,10 +73,10 @@ def process_directory(input_dir, output_dir):
     
     # Concatenate all CSV files
     if csv_files:
-        combined_output = 'combined_output.csv'
+        combined_output = 'ref/combined_output.csv'
         concat_csv_files(csv_files, combined_output)
         print(f"Combined CSV saved to {combined_output}")
 
 if __name__ == '__main__':
-    process_directory('./output', './csv_output')
+    process_directory('./res/ocr_result_json', './ref/csv_output')
     print("Conversion completed. Check the csv_output directory.")

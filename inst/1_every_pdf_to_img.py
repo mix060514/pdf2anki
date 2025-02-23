@@ -17,7 +17,7 @@ def pdf_to_images(pdf_path, output_dir):
         page = doc.load_page(0)  # Get first page
 
         # Increase resolution by applying a zoom matrix (2倍放大)
-        zoom_factor = 6  # 可以调整为 2、3 或更高
+        zoom_factor = 20  # 可以调整为 2、3 或更高
         matrix = fitz.Matrix(zoom_factor, zoom_factor)
         pix = page.get_pixmap(matrix=matrix)
 
