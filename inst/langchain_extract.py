@@ -1,4 +1,5 @@
-#%% import pandas as pd
+#%%
+import pandas as pd
 from langchain_ollama import ChatOllama
 from pydantic import BaseModel, Field
 
@@ -33,7 +34,7 @@ class Word(BaseModel):
 llm = ChatOllama(model="deepseek-r1:8b", temperature=0)
 structured_llm = llm.with_structured_output(Word, method="json_schema")
 
-grp = 2
+grp = 1
 df_ = df0.query(f"word_group == {grp}")
 df_
 #%%
@@ -49,9 +50,6 @@ json_data: {json_data}
 please be noticed that not all information is useful, you need to filter out the useful information
 there is  a only main word in json_data, you need to know which part is for main word and which part is for derived words
 and which is actually a next word but wrong to put here.
-
-here is an example of the the structured, but format is wrong:
-""" + """
 {
     "word": "analphabetic",
     "split_to_root_or_affix": {
@@ -80,7 +78,6 @@ here is an example of the the structured, but format is wrong:
         }
     ]
 }
-
 pls <think> in <think> tag
 """
 # result = structured_llm.invoke("Extract key information from this text: " + test_text, json_data=json_data)
@@ -95,61 +92,11 @@ print(result.sentences)
 
 #%%
 
-for grp in df0.word_group.unique():
-    df_ = df0.query(f"word_group == {grp}")
-    json_data = df_.to_dict('records')
-    prompt_text = f"""
-    the json input data is ocr result, which have x, y, text, page, chinese_text, english_text, is_word, is_chinese, is_english, english_length, chinese_length, is_chinese_sentence, is_english_sentence, word, word_group columns
-    i need you to extract the key information from this data
-    json_data: {json_data}
-
-    please be noticed that not all information is useful, you need to filter out the useful information
-    there is  a only main word in json_data, you need to know which part is for main word and which part is for derived words
-    and which is actually a next word but wrong to put here.
-
-    here is an example of the the structured, but format is wrong:
-    """ + """
-    {
-        "word": "analphabetic",
-        "split_to_root_or_affix": {
-            "value": "an/alphabet/ic",
-            "meaning": "without/alphabet/形容詞字尾"
-        },
-        "meanings": [
-            {
-                "part_of_speech": "形",
-                "translation": "不識字的"
-            },
-            {
-                "part_of_speech": "名",
-                "translation": "文盲"
-            }
-        ],
-        "derivatives": [],
-        "examples_sentence": [
-            {
-                "english": "Fewer and fewer people are analphabetic nowadays.",
-                "chinese": "不識字的人如越来越少見了。"
-            },
-            {
-                "english": "My grandfather was an analphabetic all his life.",
-                "chinese": "我爺爺終其一生是個文盲。"
-            }
-        ]
-    }
-
-    pls <think> in <think> tag
-    """
-    # result = structured_llm.invoke("Extract key information from this text: " + test_text, json_data=json_data)
-    result = structured_llm.invoke("Extract key information from this text: " + prompt_text)
-
-    print(result.think)
-    print(result.word)
-    print(result.chinese_meaning)
-    print(result.word_root)
-    print(result.derived_words)
-    print(result.sentences)
-    if grp >= 5:
-        break
+print(result.think)
+print(result.word)
+print(result.chinese_meaning)
+print(result.word_root)
+print(result.derived_words)
+print(result.sentences)
 
 # %%
