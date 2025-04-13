@@ -9,3 +9,6 @@ _archive
 __pycache__
 splited_image
 ocr_result_json
+ref/
+# Ignore all files in ref directory
+ref/**/*
